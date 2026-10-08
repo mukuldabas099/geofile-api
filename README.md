@@ -6,6 +6,8 @@ polygon **area** and line **length** — never computed in raw latitude/longitud
 
 ![CI](https://github.com/mukuldabas099/geofile-api/actions/workflows/ci.yml/badge.svg)
 
+
+**Live demo:** https://geofile-api.onrender.com/docs  (free tier: the first request after idle may take ~50 s to wake up)
 - **Stack:** FastAPI · GeoPandas / pyogrio (GDAL) · Shapely 2 · PyProj · SQLAlchemy 2 (SQLite) · pytest
 - **Interactive docs:** Swagger UI at `/docs`, ReDoc at `/redoc`, schema at `/openapi.json`
 - **51 automated tests** covering measurements, CRS handling, validation and security edge cases, plus `ruff` linting in CI
