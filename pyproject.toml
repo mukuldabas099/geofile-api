@@ -1,0 +1,19 @@
+[project]
+name = "geofile-api"
+version = "1.1.0"
+description = "FastAPI service that ingests KML / zipped Shapefiles and returns CRS-aware area and length measurements."
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["B008", "UP042"]  # B008: FastAPI Depends()/File() defaults are idiomatic; UP042: (str, Enum) kept for clarity

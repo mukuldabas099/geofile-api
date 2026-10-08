@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Sample survey (Delhi)</name>
+    <Placemark>
+      <name>Park boundary</name>
+      <description>Polygon: ~1.1 km x 1.0 km</description>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>
+        77.2000,28.6000,0 77.2100,28.6000,0 77.2100,28.6090,0 77.2000,28.6090,0 77.2000,28.6000,0
+      </coordinates></LinearRing></outerBoundaryIs></Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Access road</name>
+      <description>LineString</description>
+      <LineString><coordinates>
+        77.2000,28.6000,0 77.2050,28.6045,0 77.2100,28.6090,0
+      </coordinates></LineString>
+    </Placemark>
+    <Placemark>
+      <name>Gate</name>
+      <description>Point: no measurement</description>
+      <Point><coordinates>77.2000,28.6000,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Mixed marker</name>
+      <description>MultiGeometry (point + line): the line is measured, the point is ignored</description>
+      <MultiGeometry>
+        <Point><coordinates>77.2050,28.6045,0</coordinates></Point>
+        <LineString><coordinates>77.2000,28.6000,0 77.2010,28.6010,0</coordinates></LineString>
+      </MultiGeometry>
+    </Placemark>
+    <Placemark>
+      <name>Survey note</name>
+      <description>No geometry at all: reported as UNSUPPORTED, never crashes</description>
+    </Placemark>
+  </Document>
+</kml>

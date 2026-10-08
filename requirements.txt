@@ -1,0 +1,14 @@
+# Web framework
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+python-multipart>=0.0.9
+pydantic-settings>=2.3,<3.0
+
+# Persistence
+sqlalchemy>=2.0,<2.2
+
+# Geospatial stack (wheels bundle GDAL/GEOS/PROJ -> no system packages needed)
+geopandas>=1.0,<2.0
+shapely>=2.0,<3.0
+pyproj>=3.6,<4.0
+pyogrio>=0.9,<1.0

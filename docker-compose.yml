@@ -1,0 +1,9 @@
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    volumes: ["geodata:/srv/data"]
+    environment:
+      GEOAPI_DATA_DIR: /srv/data
+volumes:
+  geodata:
