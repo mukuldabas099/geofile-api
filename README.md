@@ -214,22 +214,24 @@ why it is unit-tested directly with Shapely geometries.
 
 ```mermaid
 flowchart TD
-    A[POST /api/files/] --> B{Extension .kml / .zip?}
-    B -- no --> E1[415]
-    B -- yes --> C[Stream to disk with size limit]
-    C --> D{Content sniff: XML/KML or valid ZIP?}
-    D -- no --> E2[422]
-    D -- yes --> F[Create record: PENDING -> PROCESSING]
-    F --> G{KML or ZIP?}
-    G -- KML --> H[pyogrio: read all layers, force 2D]
-    G -- ZIP --> I[Safe extract: zip-slip, bomb, entry limits] --> J[Require .shp+.shx+.dbf] --> H2[pyogrio: read each .shp]
-    H --> K[Combine layers, resolve CRS]
+    A["POST /api/files/"] --> B{"Extension .kml or .zip?"}
+    B -- no --> E1["415 Unsupported type"]
+    B -- yes --> C["Stream to disk with size limit"]
+    C --> D{"Content check: XML/KML or valid ZIP?"}
+    D -- no --> E2["422 Invalid upload"]
+    D -- yes --> F["Create record: PENDING, then PROCESSING"]
+    F --> G{"KML or ZIP?"}
+    G -- KML --> H["pyogrio: read all layers, force 2D"]
+    G -- ZIP --> I["Safe extract: zip-slip, bomb, entry limits"]
+    I --> J["Require .shp + .shx + .dbf"]
+    J --> H2["pyogrio: read each .shp"]
+    H --> K["Combine layers, resolve CRS"]
     H2 --> K
-    K --> L{CRS known? else assume_crs}
-    L -- no --> E3[FAILED + 422 missing_crs]
-    L -- yes --> M[For each feature: GeoJSON + JSON-safe properties + measure]
-    M --> N[Bulk-insert features in batches -> status COMPLETED]
-    N --> O[201 + file info]
+    K --> L{"CRS known, or assume_crs given?"}
+    L -- no --> E3["FAILED + 422 missing_crs"]
+    L -- yes --> M["For each feature: GeoJSON + JSON-safe properties + measure"]
+    M --> N["Bulk-insert features in batches, status COMPLETED"]
+    N --> O["201 + file info"]
 ```
 
 Any failure after the record exists sets `status=FAILED` with a message instead of leaving it half-done.
